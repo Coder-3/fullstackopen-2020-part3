@@ -1,0 +1,27 @@
+{
+  "name": "part3",
+  "version": "1.0.0",
+  "description": "fullstack open 2020 part3",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Coder-3/fullstackopen-2020-part3.git"
+  },
+  "author": "Cédric",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Coder-3/fullstackopen-2020-part3/issues"
+  },
+  "homepage": "https://github.com/Coder-3/fullstackopen-2020-part3#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
