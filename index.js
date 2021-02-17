@@ -65,12 +65,24 @@ const generateId = () => {
   return persons.length > 0 ? Math.floor(Math.random() * 1000000000) : 0
 }
 
+const findIsNameDuplicate = (personName) => {
+  return !!persons.find(person => person.name === personName)
+}
+
 app.post('/api/persons', (request, response) => {
   const body = request.body
 
   if(!body.name) {
-    return response.status(400).json({
+    return response.status(204).json({
       error: 'name missing'
+    })
+  } else if(!body.number) {
+    return response.status(204).json({
+      error: 'number missing'
+    })
+  } else if(findIsNameDuplicate(body.name)) {
+    return response.status(400).json({
+      error: 'name exists'
     })
   }
 
