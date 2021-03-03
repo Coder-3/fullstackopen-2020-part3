@@ -41,22 +41,22 @@ const showNumberOfPersons = () => {
   return `<p>Phonebook has info for ${persons.length} people</p>`
 }
 
-// app.get('/api/persons', (request, response) => {
-//   const body = request.body
+app.post('/api/persons', (request, response) => {
+  const body = request.body
 
-//   if(!body) {
-//     return response.status(400).json({ error: 'content missing' })
-//   }
+  if(!body) {
+    return response.status(400).json({ error: 'content missing' })
+  }
 
-//   const person = new Person({
-//     name: body.name,
-//     number: body.number,
-//   })
+  const person = new Person({
+    name: body.name,
+    number: body.number,
+  })
 
-//   person.save().then(savedPerson => {
-//     response.json(savedPerson)
-//   })
-// })
+  person.save().then(savedPerson => {
+    response.json(savedPerson)
+  })
+})
 
 app.get('/api/persons', (request, response) => {
   Person.find({}).then(result => {
@@ -89,33 +89,33 @@ const findIsNameDuplicate = (personName) => {
   return !!persons.find(person => person.name === personName)
 }
 
-app.post('/api/persons', (request, response) => {
-  const body = request.body
+// app.post('/api/persons', (request, response) => {
+//   const body = request.body
 
-  if(!body.name) {
-    return response.status(204).json({
-      error: 'name missing'
-    })
-  } else if(!body.number) {
-    return response.status(204).json({
-      error: 'number missing'
-    })
-  } else if(findIsNameDuplicate(body.name)) {
-    return response.status(400).json({
-      error: 'name exists'
-    })
-  }
+//   if(!body.name) {
+//     return response.status(204).json({
+//       error: 'name missing'
+//     })
+//   } else if(!body.number) {
+//     return response.status(204).json({
+//       error: 'number missing'
+//     })
+//   } else if(findIsNameDuplicate(body.name)) {
+//     return response.status(400).json({
+//       error: 'name exists'
+//     })
+//   }
 
-  const person = {
-    id: generateId(),
-    name: body.name,
-    number: body.number,
-  }
+//   const person = {
+//     id: generateId(),
+//     name: body.name,
+//     number: body.number,
+//   }
 
-  persons.concat(person)
+//   persons.concat(person)
 
-  response.json(person)
-})
+//   response.json(person)
+// })
 
 const PORT = process.env.PORT
 app.listen(PORT, () => {
