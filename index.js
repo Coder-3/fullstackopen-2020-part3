@@ -42,7 +42,9 @@ app.get('/api/persons', (request, response) => {
 })
 
 app.get('/info', (request, response) => {
-  response.send(`${showNumberOfPersons()} ${showDateNowInUCT()}`)
+  Person.count({}).then(result => {
+    response.json(result)
+  })
 })
 
 app.get('/api/persons/:id', (request, response) => {
