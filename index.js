@@ -18,7 +18,7 @@ const showNumberOfPersons = () => {
   return `<p>Phonebook has info for ${persons.length} people</p>`
 }
 
-app.post('/api/persons', (request, response) => {
+app.post('/api/persons', (request, response, next) => {
   const body = request.body
 
   if(!body) {
@@ -33,6 +33,7 @@ app.post('/api/persons', (request, response) => {
   person.save().then(savedPerson => {
     response.json(savedPerson.toJSON())
   })
+  .catch(error => next(error))
 })
 
 app.get('/api/persons', (request, response) => {
