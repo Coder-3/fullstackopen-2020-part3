@@ -1,22 +1,13 @@
 const express = require('express')
 const app = express()
+const cors = require('cors')
 require('dotenv').config()
 const Person = require('./models/person')
 
-const cors = require('cors')
 
+app.use(express.static('build'))
 app.use(cors())
 app.use(express.json())
-app.use(express.static('build'))
-
-const showDateNowInUCT = () => {
-  const nowInUTC = new Date(Date.now()).toUTCString()
-  return `<p>${nowInUTC}</p>`
-}
-
-const showNumberOfPersons = () => {
-  return `<p>Phonebook has info for ${persons.length} people</p>`
-}
 
 app.post('/api/persons', (request, response, next) => {
   const body = request.body
@@ -94,7 +85,7 @@ const errorHandler = (error, request, response, next) => {
 
 app.use(errorHandler)
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
